@@ -1,6 +1,7 @@
 {
-    "name": "launchpad",
-    "compatibility_date": "2025-12-06",
-    "main": "src/index.js"
+  "name": "launchpad",
+  "compatibility_date": "2025-12-06",
+  "assets": {
+    "directory": "."
   }
-
+}
