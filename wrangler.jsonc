@@ -1,6 +1,6 @@
 {
     "name": "launchpad",
     "compatibility_date": "2025-12-06",
-    "main": "src/index.ts"
+    "main": "src/index.js"
   }
 
