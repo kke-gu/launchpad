@@ -30,3 +30,7 @@ build/
 *.tmp
 *.temp
 
+# Git
+.git/
+.gitignore
+
