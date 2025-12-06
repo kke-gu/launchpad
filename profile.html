@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--
+  프로필 페이지
+  - 로그인한 사용자의 계정 정보를 표시
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로필 - Growth Launchpad</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+  <style>
+    #profile-content {
+      max-width: 1000px !important;
+      padding: 2.5rem !important;
+    }
+    
+    #profile-content h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    #profile-content .page-section-subtitle {
+      margin-bottom: 2.5rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    
+    .profile-header {
+      background: linear-gradient(135deg, #3461ff 0%, #244add 100%);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      color: white;
+      box-shadow: 0 4px 20px rgba(52, 97, 255, 0.2);
+    }
+    
+    .profile-header-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .profile-header-info {
+      font-size: 1rem;
+      opacity: 0.95;
+      margin-bottom: 0.25rem;
+    }
+    
+    .profile-header-email {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 0.5rem;
+    }
+    
+    .profile-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    
+    .profile-info-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: all 0.2s;
+    }
+    
+    .profile-info-item:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(52, 97, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .profile-info-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .profile-info-value {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      word-break: break-word;
+    }
+    
+    .profile-actions {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    
+    @media (max-width: 1024px) {
+      .profile-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      #profile-content {
+        padding: 1.5rem !important;
+      }
+      
+      .profile-header {
+        padding: 2rem 1.5rem;
+      }
+      
+      .profile-header-name {
+        font-size: 1.5rem;
+      }
+      
+      .profile-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .profile-actions {
+        justify-content: stretch;
+      }
+      
+      .profile-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 공통 헤더 / GNB -->
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Growth Launchpad 홈">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="m-letter">m</span>
+        <span class="tm-symbol">™</span>
+      </div>
+      <div>
+        <p class="brand-label">맑은소프트</p>
+        <p class="brand-sub">Growth Launchpad</p>
+      </div>
+    </a>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="메인 메뉴 열기">
+      ☰
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <button class="mobile-menu-close" type="button" aria-label="메인 메뉴 닫기">×</button>
+      <a href="products.html" class="nav-pill">상품</a>
+      <a href="quote.html" class="nav-pill">견적 작성</a>
+      <a href="status.html" class="nav-pill">진행 현황</a>
+      <a href="resources.html" class="nav-pill">자료실</a>
+
+      <!-- 모바일 전용 추가 메뉴 -->
+      <div class="main-nav-extra">
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">회사소개서</a>
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+        <a href="https://help.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">고객센터</a>
+        <a href="login.html" class="nav-pill nav-pill--primary">로그인</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">회사소개서</a>
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+      <a href="https://help.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">고객센터</a>
+      <a href="login.html" class="btn primary">로그인</a>
+      <div class="mobile-header-cta">
+        <a href="login.html" class="btn primary full-width">로그인</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 프로필 정보 영역 -->
+  <main class="page-main">
+    <section class="page-section--no-border">
+      <div id="profile-content" class="form-card" style="max-width: 800px; margin: 0 auto;">
+        <!-- 프로필 정보가 여기에 동적으로 표시됩니다 -->
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/profile.js"></script>
+</body>
+</html>

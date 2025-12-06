@@ -1,0 +1,1604 @@
+/*
+  견적 작성 페이지 전용 CSS (quote.css)
+  - 견적 작성 폼 관련 스타일
+*/
+
+/* 폼 카드 */
+.form-card {
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 1.8rem 1.9rem;
+    background: var(--surface);
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+/* 견적 작성 페이지는 common.css의 .page-main 스타일 사용 */
+
+.form-card--wide {
+    max-width: 100%;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.form-grid-single-row {
+    grid-template-columns: 2fr 1fr 1fr 1.2fr 1.5fr;
+    gap: 1rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 0.8rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    outline: none;
+    background: #ffffff;
+}
+
+/* 드롭다운 화살표 오른쪽 여백 */
+.form-field select {
+    padding-right: 3rem;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%236c7686' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px 8px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px rgba(52, 97, 255, 0.15);
+    background: #ffffff;
+}
+
+.form-field input[readonly],
+.form-field select[readonly],
+.form-field textarea[readonly] {
+    background: #f9fafb;
+    cursor: not-allowed;
+}
+
+.form-field input[readonly]:focus,
+.form-field select[readonly]:focus,
+.form-field textarea[readonly]:focus {
+    background: #f9fafb;
+    border-color: var(--border);
+    box-shadow: none;
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    border-top: none;
+}
+
+/* 견적서 섹션 - 박스 카드 형태 */
+.quote-section {
+    margin-bottom: 1.75rem;
+    padding: 1.5rem 1.75rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.quote-section:last-of-type {
+    margin-bottom: 0;
+}
+
+/* 고객사 정보 박스 */
+.quote-section--customer {
+    margin-bottom: 1.5rem;
+}
+
+/* 견적서 박스 */
+.quote-section--document {
+    margin-top: 0.5rem;
+}
+
+/* 견적서 헤더 및 회사 정보 */
+.quote-company-details {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.quote-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quote-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #0F91D0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    font-family: "NanumBarunGothic", "Nanum Barun Gothic", "나눔바른고딕", sans-serif;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+}
+
+.quote-logo-m {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transform: scaleY(1.3);
+    display: inline-block;
+    line-height: 1;
+}
+
+.quote-logo-tm {
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    font-size: 0.6rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.quote-company-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.quote-company-name {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.quote-company-slogan {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.quote-header-right {
+    text-align: right;
+}
+
+.quote-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.quote-company-info-details {
+    margin-top: 0.75rem;
+}
+
+.quote-company-info-details p {
+    margin: 0.35rem 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.quote-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* form-actions 바로 앞의 quote-section border 제거 */
+.quote-section:last-of-type {
+    border-bottom: none;
+}
+
+/* quote-detail.html에서만 적용: 마지막 quote-section에 border-bottom과 margin-bottom 추가 */
+body:has(#quote-detail-content) .quote-section:last-of-type {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+}
+
+/* form-actions 바로 앞의 quote-subsection border 제거 */
+.quote-section:last-of-type .quote-subsection:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.quote-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary);
+}
+
+.checkbox-item span {
+    font-size: 0.95rem;
+    color: var(--text);
+}
+
+.checkbox-item:hover span {
+    color: var(--primary);
+}
+
+/* 필수 표시 */
+.required {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* 인라인 액션 버튼 */
+.form-actions-inline {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+/* 입력창과 버튼 함께 */
+.input-with-button {
+    display: flex;
+    gap: 0.5rem;
+    align-items: stretch;
+}
+
+.input-with-button input {
+    flex: 1;
+}
+
+.input-with-button .btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* 템플릿 필터 행 (카테고리 + 검색) */
+.template-filter-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.template-filter-row .form-field {
+    margin-bottom: 0;
+}
+
+.template-filter-row .search-box {
+    margin-bottom: 0;
+    flex: 1;
+}
+
+/* 고객사 리스트 컨테이너 */
+.customer-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.customer-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    transition: all 0.2s;
+}
+
+.customer-list-item:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(52, 97, 255, 0.1);
+}
+
+.customer-list-item-main {
+    flex: 1;
+}
+
+.customer-quote-count {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted);
+    margin-left: 0.5rem;
+}
+
+.customer-list-item-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.customer-list-item-contact {
+    margin: 0 0 0.25rem 0;
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.customer-list-item-info {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.btn-select-customer {
+    margin-left: 1rem;
+    flex-shrink: 0;
+}
+
+.customer-list-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+}
+
+/* 모달 크기 조정 */
+.modal-content--large {
+    max-width: 800px;
+    width: 95%;
+}
+
+/* 모달 body 여백 */
+.modal-body {
+    padding: 1.5rem 2rem 2rem;
+}
+
+/* 검색 박스 */
+.search-box {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-box input {
+    flex: 1;
+}
+
+.search-box .btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* 견적서 하위 섹션 */
+.quote-subsection {
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.quote-subsection:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.quote-subsection-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.quote-subsection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.quote-subsection-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* 견적 항목 카드 */
+.quote-items-cards {
+    display: none; /* 사용하지 않음 - quote-items-mobile 사용 */
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* 견적 항목 캐러셀 (사용하지 않음) */
+.quote-items-carousel-wrapper {
+    display: none !important;
+}
+
+.quote-items-carousel {
+    position: relative;
+}
+
+.quote-items-carousel-wrapper .quote-items-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.quote-carousel-btn {
+    display: none;
+}
+
+.quote-carousel-indicator {
+    display: none;
+}
+
+.quote-items-carousel-controls {
+    display: none;
+}
+
+.quote-item-card {
+    display: none; /* 사용하지 않음 - quote-item-card-mobile 사용 */
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.quote-item-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(52, 97, 255, 0.1);
+}
+
+.quote-item-card-header {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.quote-item-card-category {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.quote-item-card-detail {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.quote-item-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quote-item-card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.quote-item-card-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.quote-item-card-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.quote-item-card-value {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.quote-item-card-value--amount {
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.quote-item-card-note {
+    margin-top: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border);
+}
+
+.quote-item-card-note-text {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* 견적 항목 테이블 (하위 호환성) */
+.quote-items-table {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+/* 모바일 카드는 기본적으로 숨김 (PC에서) */
+.quote-items-mobile {
+    display: none;
+}
+
+.quote-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    table-layout: fixed;
+}
+
+.quote-table th,
+.quote-table td {
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    vertical-align: top;
+}
+
+.quote-table th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+}
+
+.quote-table td {
+    background: var(--surface);
+}
+
+/* 견적 항목 테이블 컬럼 너비 조정 */
+.quote-table th:nth-child(1),
+.quote-table td:nth-child(1) {
+    width: 40px; /* 체크박스 */
+    white-space: nowrap;
+    text-align: center;
+}
+
+.quote-table th:nth-child(2),
+.quote-table td:nth-child(2) {
+    width: 250px; /* 구분 */
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    vertical-align: top;
+}
+
+.quote-table th:nth-child(3),
+.quote-table td:nth-child(3) {
+    width: auto; /* 세부 항목 - 넓히기 */
+    min-width: 200px;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    vertical-align: top;
+}
+
+.quote-table th:nth-child(4),
+.quote-table td:nth-child(4) {
+    width: 120px; /* 기본계약기간(월) */
+    white-space: nowrap;
+    text-align: center; /* 중앙 정렬 */
+}
+
+.quote-table th:nth-child(5),
+.quote-table td:nth-child(5) {
+    width: 100px; /* 수량 */
+    white-space: nowrap;
+    text-align: center; /* 중앙 정렬 */
+}
+
+.quote-table th:nth-child(6),
+.quote-table td:nth-child(6) {
+    width: 120px; /* 단가 */
+    text-align: right; /* 우측 정렬 */
+}
+
+.quote-table th:nth-child(7),
+.quote-table td:nth-child(7) {
+    width: 120px; /* 공급가액 */
+    text-align: right; /* 우측 정렬 */
+}
+
+.quote-table th:nth-child(8),
+.quote-table td:nth-child(8) {
+    width: 400px; /* 비고 - 더 넓히기 */
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    vertical-align: top;
+}
+
+/* quote-detail.html PC에서 첫 번째 컬럼(체크박스) 숨김 */
+@media (min-width: 769px) {
+    body:has(#quote-detail-content) .quote-table th:first-child,
+    body:has(#quote-detail-content) .quote-table td:first-child {
+        display: none;
+    }
+}
+
+.quote-table .form-input {
+    width: 100%;
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    background: #ffffff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.quote-table .form-input[readonly] {
+    background: #f9fafb;
+    cursor: not-allowed;
+}
+
+.quote-table .form-input-small {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+    background: #ffffff;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.quote-table .form-input-small[readonly] {
+    background: #f9fafb;
+    cursor: not-allowed;
+}
+
+/* 자동 높이 조절 textarea */
+.form-input-auto-resize {
+    resize: none;
+    overflow-y: auto;
+    min-height: 38px;
+    line-height: 1.5;
+    vertical-align: top;
+    max-height: 200px;
+}
+
+/* 세련된 스크롤바 디자인 - 웹킷 브라우저 (Chrome, Safari, Edge) */
+.form-input-auto-resize::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-input-auto-resize::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+.form-input-auto-resize::-webkit-scrollbar-thumb {
+    background: rgba(108, 120, 134, 0.3);
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.form-input-auto-resize::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 120, 134, 0.5);
+}
+
+.form-input-auto-resize:focus::-webkit-scrollbar-thumb {
+    background: rgba(52, 97, 255, 0.3);
+}
+
+.form-input-auto-resize:focus::-webkit-scrollbar-thumb:hover {
+    background: rgba(52, 97, 255, 0.5);
+}
+
+/* Firefox 스크롤바 스타일 */
+.form-input-auto-resize {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(108, 120, 134, 0.3) transparent;
+}
+
+.form-input-auto-resize:focus {
+    scrollbar-color: rgba(52, 97, 255, 0.3) transparent;
+}
+
+/* 테이블 내 입력창 높이 동기화 */
+.quote-table .form-input,
+.quote-table .form-input-small {
+    height: auto;
+    min-height: 38px;
+    transition: none;
+}
+
+.quote-item-row {
+    cursor: move;
+}
+
+.drag-handle-cell {
+    text-align: center;
+    padding: 0.5rem;
+    vertical-align: middle;
+}
+
+.drag-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    cursor: grab;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    min-width: 32px;
+    min-height: 32px;
+    touch-action: none;
+}
+
+.drag-handle:hover {
+    color: var(--primary);
+    background: var(--bg);
+}
+
+.drag-handle:active {
+    cursor: grabbing;
+}
+
+.drag-handle[draggable="true"] {
+    cursor: grab;
+}
+
+.drag-handle svg {
+    pointer-events: none;
+}
+
+.quote-item-row:hover {
+    background: #f9fafb;
+}
+
+.quote-item-row.dragging {
+    opacity: 0.6;
+    background: rgba(52, 97, 255, 0.1);
+    box-shadow: 0 4px 12px rgba(52, 97, 255, 0.2);
+    transform: scale(1.02);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    z-index: 1000;
+    position: relative;
+}
+
+.quote-item-row.drag-over {
+    border-top: 3px solid var(--primary);
+    padding-top: calc(0.5rem - 1px);
+    background: rgba(52, 97, 255, 0.05);
+}
+
+.quote-item-row.drag-over::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+    z-index: 1;
+}
+
+.quote-item-actions {
+    display: flex;
+    gap: 0.25rem;
+    justify-content: center;
+}
+
+/* 계약 총액 섹션 */
+.quote-total-section {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-top: 2px solid var(--border);
+    background: var(--bg);
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.quote-total-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.quote-total-label {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.quote-total-amount {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.btn-icon-only {
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    cursor: pointer;
+    color: var(--muted);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    min-width: 28px;
+    height: 28px;
+    font-size: 1rem;
+}
+
+.btn-icon-only,
+button {
+    cursor: pointer;
+}
+
+.btn-icon-only:hover {
+    background: var(--bg);
+    color: var(--primary);
+}
+
+.btn-icon-only.btn-delete-item:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+/* 템플릿 아이템 선택 */
+.template-item {
+    cursor: pointer;
+}
+
+.template-item.selected {
+    border-color: var(--primary);
+    background: rgba(52, 97, 255, 0.05);
+}
+
+.template-item:hover {
+    border-color: var(--primary);
+}
+
+.template-item-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: 1rem;
+    flex-shrink: 0;
+}
+
+.template-item-actions .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.template-item-actions .btn:hover {
+    transform: none;
+}
+
+/* 반응형: 모바일 */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 0;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+    
+    .checkbox-group {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .input-with-button {
+        flex-direction: column;
+    }
+    
+    .input-with-button .btn {
+        width: 100%;
+    }
+    
+    .modal-body {
+        padding: 1rem 1.5rem 1.5rem;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .customer-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .btn-select-customer {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    .template-item-actions {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+    
+    .template-filter-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem; /* 모바일에서 간격 더 줄임 */
+        margin-bottom: 1rem;
+    }
+    
+    .template-filter-row .form-field {
+        flex: 1 !important; /* 인라인 스타일의 flex: 0 0 200px 오버라이드 */
+        margin-bottom: 0;
+        width: 100%; /* 전체 너비 사용 */
+    }
+    
+    .template-filter-row .search-box {
+        margin-bottom: 0;
+    }
+    
+    .template-item-actions {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+    
+    .quote-company-details {
+        padding: 1rem;
+    }
+
+    .quote-header {
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .quote-header-right {
+        text-align: left;
+        width: 100%;
+    }
+
+    .quote-title {
+        font-size: 1.5rem;
+    }
+    
+    .quote-subsection-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .quote-subsection-title-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+    
+    .quote-subsection-title-group > div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    .quote-subsection-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .quote-subsection-actions .btn {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    /* 모바일에서 견적 항목 테이블 숨김 */
+    .quote-items-table {
+        display: none;
+    }
+    
+    /* 모바일에서 견적 항목 카드 형태로 표시 */
+    .quote-items-mobile {
+        display: block;
+        margin-top: 1rem;
+    }
+    
+    .quote-item-card-mobile {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    .quote-item-card-mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .quote-item-card-mobile-title {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--text);
+    }
+    
+    .quote-item-card-mobile-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+    
+    .quote-item-card-mobile-actions .btn-icon-only {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+    
+    .quote-item-card-mobile-field {
+        margin-bottom: 1rem;
+    }
+    
+    .quote-item-card-mobile-field:last-child {
+        margin-bottom: 0;
+    }
+    
+    .quote-item-card-mobile-field label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--muted);
+        margin-bottom: 0.5rem;
+    }
+    
+    .quote-item-card-mobile-field .form-input,
+    .quote-item-card-mobile-field .form-input-small,
+    .quote-item-card-mobile-field textarea {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+    }
+    
+    .quote-item-card-mobile-field textarea {
+        min-height: 60px;
+        resize: vertical;
+    }
+    
+    .quote-item-card-mobile-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .quote-item-card-mobile-row:last-child {
+        margin-bottom: 0;
+    }
+    
+    .quote-item-card-mobile-row .quote-item-card-mobile-field {
+        margin-bottom: 0;
+    }
+    
+    .quote-item-card-mobile-footer {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+    }
+    
+    .quote-item-card-mobile-footer .btn {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .quote-item-card-mobile-footer .btn-secondary {
+        background: var(--primary);
+        color: #fff;
+        border: 1px solid var(--primary);
+    }
+    
+    .quote-item-card-mobile-footer .btn-secondary:hover {
+        background: var(--primary-dark);
+        border-color: var(--primary-dark);
+    }
+    
+    .quote-item-card-mobile-footer .btn-ghost {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--border);
+    }
+    
+    .quote-item-card-mobile-footer .btn-ghost:hover {
+        background: var(--bg);
+        color: var(--text);
+        border-color: var(--muted);
+    }
+    
+    /* 모바일에서 견적 항목 캐러셀 숨김 (사용하지 않음) */
+    .quote-items-carousel-wrapper {
+        display: none;
+    }
+
+    .quote-items-carousel {
+        display: none;
+    }
+
+    .quote-items-carousel .quote-items-cards {
+        display: none;
+    }
+
+    .quote-item-card {
+        display: none;
+    }
+
+    .quote-items-carousel-controls {
+        display: none;
+    }
+
+    .quote-carousel-btn {
+        display: none;
+    }
+
+    .quote-carousel-btn:hover:not(:disabled) {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+        box-shadow: 0 4px 12px rgba(52, 97, 255, 0.2);
+    }
+
+    .quote-carousel-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .quote-carousel-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .quote-carousel-indicator {
+        display: block;
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 500;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .quote-item-card-row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .quote-item-card-category {
+        font-size: 1rem;
+    }
+
+    .quote-item-card-detail {
+        font-size: 0.9rem;
+    }
+    
+    .form-grid-single-row {
+        grid-template-columns: 1fr;
+    }
+
+    /* 모바일에서 견적서 상세 헤더와 버튼 영역 */
+    body:has(#quote-detail-content) .page-section > div:first-child {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    body:has(#quote-detail-content) .page-section > div:first-child > div:first-child {
+        width: 100%;
+        text-align: center;
+    }
+
+    body:has(#quote-detail-content) .page-section h1 {
+        text-align: center;
+    }
+
+    body:has(#quote-detail-content) .page-section-subtitle {
+        text-align: center;
+    }
+
+    /* quote-detail.html 모바일에서 quote-section-title 좌측 정렬 */
+    body:has(#quote-detail-content) .quote-section-title {
+        text-align: left;
+    }
+
+    .quote-detail-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .quote-detail-actions .btn {
+        flex: 1;
+        min-width: calc(50% - 0.25rem);
+    }
+}
+
+/* 견적서 미리보기 모달 */
+.modal-content--preview {
+    max-width: 1200px;
+    width: 95%;
+    height: 100vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background: #f0f0f0;
+    margin: 0 auto;
+}
+
+.quote-preview-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.quote-preview-paper {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    padding: 15mm;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.quote-preview-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* 미리보기 견적서 스타일 */
+.quote-preview-paper .quote-company-details {
+    margin: -15mm -15mm 2rem -15mm;
+    padding: 2.0rem 15mm 1rem 15mm;
+    background: var(--bg);
+    border-radius: 0;
+    border: none;
+}
+
+.quote-preview-paper .quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.quote-preview-paper .quote-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quote-preview-paper .quote-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #0F91D0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    font-family: "NanumBarunGothic", "Nanum Barun Gothic", "나눔바른고딕", sans-serif;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+}
+
+.quote-preview-paper .quote-logo-m {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transform: scaleY(1.3);
+    display: inline-block;
+    line-height: 1;
+}
+
+.quote-preview-paper .quote-logo-tm {
+    position: absolute;
+    top: 13px;
+    right: 8px;
+    font-size: 0.6rem;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.quote-preview-paper .quote-company-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.quote-preview-paper .quote-company-name {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.quote-preview-paper .quote-company-slogan {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.quote-preview-paper .quote-header-right {
+    text-align: right;
+}
+
+.quote-preview-paper .quote-title {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.quote-preview-paper .quote-company-info-details {
+    margin-top: 0.75rem;
+}
+
+.quote-preview-paper .quote-company-info-details p {
+    margin: 0.35rem 0;
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.quote-preview-paper .quote-subsection {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: none;
+}
+
+.quote-preview-paper .quote-subsection:last-of-type {
+    border-bottom: none;
+}
+
+.quote-preview-paper .quote-subsection-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+}
+
+.quote-preview-paper .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 0;
+}
+
+.quote-preview-paper .form-field {
+    margin-bottom: 0.8rem;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quote-preview-paper .form-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 0;
+    display: inline-block;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.quote-preview-paper .form-input {
+    font-size: 0.85rem;
+    color: var(--text);
+    padding: 0.5rem 0;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: transparent;
+    flex: 1;
+}
+
+.quote-preview-paper .quote-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.quote-preview-paper .quote-table th,
+.quote-preview-paper .quote-table td {
+    padding: 0.75rem 0.5rem;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.quote-preview-paper .quote-table th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+}
+
+.quote-preview-paper .quote-table td {
+    background: var(--surface);
+}
+
+/* 미리보기 계약 총액 섹션 */
+.quote-preview-paper .quote-total-section {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-top: 2px solid var(--border);
+    background: var(--bg);
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.quote-preview-paper .quote-total-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+}
+
+.quote-preview-paper .quote-total-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+.quote-preview-paper .quote-total-amount {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+/* 인쇄용 스타일 */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    .quote-preview-paper,
+    .quote-preview-paper * {
+        visibility: visible;
+    }
+    
+    .quote-preview-paper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        padding: 15mm;
+        box-shadow: none;
+    }
+    
+    .quote-preview-actions {
+        display: none;
+    }
+}
+

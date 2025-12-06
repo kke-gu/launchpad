@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--
+  Growth Launchpad 메인 페이지
+  - 공통 GNB와 홈(대시보드/랜딩) 역할
+  - UTF-8 / 반응형 레이아웃
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Growth Launchpad - 홈</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body class="page-home">
+  <!-- 공통 헤더 / GNB -->
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Growth Launchpad 홈">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="m-letter">m</span>
+        <span class="tm-symbol">™</span>
+      </div>
+      <div>
+        <p class="brand-label">맑은소프트</p>
+        <p class="brand-sub">Growth Launchpad</p>
+      </div>
+    </a>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="메인 메뉴 열기">
+      ☰
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <button class="mobile-menu-close" type="button" aria-label="메인 메뉴 닫기">×</button>
+      <a href="products.html" class="nav-pill">상품</a>
+      <a href="quote.html" class="nav-pill">견적 작성</a>
+      <a href="status.html" class="nav-pill">진행 현황</a>
+      <a href="resources.html" class="nav-pill">자료실</a>
+
+      <!-- 모바일 전용 추가 메뉴 -->
+      <div class="main-nav-extra">
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">회사소개서</a>
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+        <a href="https://help.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">고객센터</a>
+        <a href="login.html" class="nav-pill nav-pill--primary">로그인</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">회사소개서</a>
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+      <a href="https://help.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">고객센터</a>
+      <a href="login.html" class="btn primary">로그인</a>
+      <div class="mobile-header-cta">
+        <a href="login.html" class="btn primary full-width">로그인</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 메인 콘텐츠 -->
+  <main class="home-main">
+    <section class="home-hero">
+      <div class="home-hero-content">
+        <h1>Growth Launchpad</h1>
+        <p>
+          맑은소프트의 상품 제안서, 요금, 데모, 고객사 사례를<br>
+          한 곳에서 확인하고 고객사에 바로 대응할 수 있는 통합 허브입니다.
+        </p>
+      </div>
+      <div class="home-hero-illustration">
+        <svg width="300" height="200" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 배경 원형 -->
+          <circle cx="150" cy="100" r="80" fill="#E7F6FF" opacity="0.5"/>
+          
+          <!-- 런치패드 플랫폼 -->
+          <rect x="80" y="120" width="140" height="8" rx="4" fill="#3461FF" opacity="0.3"/>
+          
+          <!-- 로켓 (성장/런치) -->
+          <g transform="translate(150, 80)">
+            <!-- 로켓 본체 -->
+            <path d="M0 40 L-12 20 L-8 15 L0 10 L8 15 L12 20 Z" fill="#3461FF"/>
+            <!-- 로켓 창문 -->
+            <circle cx="0" cy="25" r="5" fill="#FFFFFF"/>
+            <!-- 로켓 날개 -->
+            <path d="M-12 20 L-18 25 L-12 30 M12 20 L18 25 L12 30" stroke="#244ADD" stroke-width="2" fill="none"/>
+            <!-- 로켓 불꽃 -->
+            <path d="M-6 40 L-4 50 L0 45 L4 50 L6 40" fill="#FF6B35" opacity="0.8"/>
+            <path d="M-4 40 L-2 48 L0 44 L2 48 L4 40" fill="#FFA500" opacity="0.6"/>
+          </g>
+          
+          <!-- 상승 곡선 (성장) -->
+          <path d="M60 140 Q100 100, 150 80 T240 60" stroke="#3461FF" stroke-width="3" fill="none" opacity="0.4" stroke-dasharray="5,5"/>
+          
+          <!-- 문서/제안서 아이콘들 (작게) -->
+          <rect x="50" y="150" width="30" height="40" rx="3" fill="#3461FF" opacity="0.6"/>
+          <rect x="55" y="155" width="20" height="2" rx="1" fill="#FFFFFF" opacity="0.8"/>
+          <rect x="55" y="160" width="15" height="2" rx="1" fill="#FFFFFF" opacity="0.6"/>
+          
+          <rect x="220" y="145" width="30" height="40" rx="3" fill="#244ADD" opacity="0.5"/>
+          <rect x="225" y="150" width="20" height="2" rx="1" fill="#FFFFFF" opacity="0.8"/>
+          <rect x="225" y="155" width="15" height="2" rx="1" fill="#FFFFFF" opacity="0.6"/>
+          
+          <!-- 별 아이콘들 (성공/목표) -->
+          <g transform="translate(100, 50)">
+            <path d="M0 -8 L2 2 L8 2 L3 7 L5 15 L0 11 L-5 15 L-3 7 L-8 2 L-2 2 Z" fill="#FFD700" opacity="0.6"/>
+          </g>
+          <g transform="translate(200, 45)">
+            <path d="M0 -6 L1.5 1.5 L6 1.5 L2.5 5 L3.5 11 L0 8 L-3.5 11 L-2.5 5 L-6 1.5 L-1.5 1.5 Z" fill="#FFD700" opacity="0.5"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- 대시보드 영역 -->
+    <section class="dashboard-section" style="margin-top: 3rem;">
+      <div class="dashboard-grid">
+        <!-- 상품 페이지 바로가기 배너 -->
+        <a href="products.html" class="dashboard-card dashboard-card-link dashboard-card-col1">
+          <div class="dashboard-card-header">
+            <h3>상품</h3>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="dashboard-card-desc">상품 제안서, 요금, 데모, 고객사 사례를 확인하세요</p>
+        </a>
+
+        <!-- 견적 작성 바로가기 배너 -->
+        <a href="quote.html" class="dashboard-card dashboard-card-link dashboard-card-col2">
+          <div class="dashboard-card-header">
+            <h3>견적 작성</h3>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="dashboard-card-desc">새로운 견적을 작성하고 관리하세요</p>
+        </a>
+
+        <!-- 견적 월별 분석 그래프 -->
+        <div class="dashboard-card dashboard-card-col3">
+          <div class="dashboard-card-header">
+            <h3 id="chart-title"></h3>
+            <select id="chart-year-select" class="dashboard-filter-select">
+              <!-- 연도 옵션은 JavaScript에서 동적으로 생성 -->
+            </select>
+          </div>
+          <div class="dashboard-chart" id="monthly-chart">
+            <canvas id="monthly-chart-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- 성과 에너지 패널 -->
+        <div class="dashboard-card dashboard-card-col1-2-bottom">
+          <div class="dashboard-card-header">
+            <h3 id="energy-panel-title"></h3>
+          </div>
+          <div class="energy-panel-content">
+            <!-- 성과 지표 및 진행 중 현황 -->
+            <div class="energy-panel-section">
+              <div class="energy-panel-row">
+                <div class="energy-panel-item energy-panel-item--combined">
+                  <div class="energy-panel-combined-content">
+                    <div class="energy-panel-combined-item">
+                      <div class="energy-panel-label">이번 달 계약 완료</div>
+                      <div class="energy-panel-value" id="energy-monthly-completed">0</div>
+                      <div class="energy-panel-sub-label">누적: <span id="energy-total-completed">0</span>건</div>
+                    </div>
+                    <div class="energy-panel-combined-divider"></div>
+                    <div class="energy-panel-combined-item">
+                      <div class="energy-panel-label">계약 성공률</div>
+                      <div class="energy-panel-value" id="energy-success-rate">0%</div>
+                      <div class="energy-panel-sub-label">전체 견적 대비</div>
+                    </div>
+                  </div>
+                  
+                  <!-- 계약 총액 -->
+                  <div class="energy-panel-amount-section">
+                    <div class="energy-panel-amount-item">
+                      <span class="energy-panel-amount-label">이번 달 계약 총액</span>
+                      <span class="energy-panel-amount-value" id="energy-monthly-amount">0원</span>
+                    </div>
+                    <div class="energy-panel-amount-item">
+                      <span class="energy-panel-amount-label">누적 계약 총액</span>
+                      <span class="energy-panel-amount-value" id="energy-total-amount">0원</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 진행 중 현황 -->
+                <div class="energy-panel-item energy-panel-item--status">
+                  <div class="energy-panel-status-list">
+                    <div class="energy-panel-status-item">
+                      <div class="energy-panel-label">접수된 견적 수</div>
+                      <div class="energy-panel-value energy-panel-value--small" id="energy-received">0</div>
+                    </div>
+                    <div class="energy-panel-status-item">
+                      <div class="energy-panel-label">발송 완료 건수</div>
+                      <div class="energy-panel-value energy-panel-value--small" id="energy-sent">0</div>
+                    </div>
+                    <div class="energy-panel-status-item">
+                      <div class="energy-panel-label">협의 중 건수</div>
+                      <div class="energy-panel-value energy-panel-value--small" id="energy-negotiating">0</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 공통 스크립트 -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/index.js"></script>
+</body>
+</html>
+
+

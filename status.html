@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+  진행 현황 페이지
+  - 고객사별 제안/견적/계약 진행 상태를 한눈에 보는 리스트
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>진행 현황 - Growth Launchpad</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body class="page-quote">
+  <!-- 공통 헤더 / GNB -->
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Growth Launchpad 홈">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="m-letter">m</span>
+        <span class="tm-symbol">™</span>
+      </div>
+      <div>
+        <p class="brand-label">맑은소프트</p>
+        <p class="brand-sub">Growth Launchpad</p>
+      </div>
+    </a>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="메인 메뉴 열기">
+      ☰
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <button class="mobile-menu-close" type="button" aria-label="메인 메뉴 닫기">×</button>
+      <a href="products.html" class="nav-pill">상품</a>
+      <a href="quote.html" class="nav-pill">견적 작성</a>
+      <a href="status.html" class="nav-pill">진행 현황</a>
+      <a href="resources.html" class="nav-pill">자료실</a>
+
+      <!-- 모바일 전용 추가 메뉴 -->
+      <div class="main-nav-extra">
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">회사소개서</a>
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+        <a href="https://help.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">고객센터</a>
+        <a href="login.html" class="nav-pill nav-pill--primary">로그인</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">회사소개서</a>
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+      <a href="https://help.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">고객센터</a>
+      <a href="login.html" class="btn primary">로그인</a>
+      <div class="mobile-header-cta">
+        <a href="login.html" class="btn primary full-width">로그인</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 진행 현황 테이블 -->
+  <main class="page-main">
+    <!-- 견적 미션 진행 현황 -->
+    <div class="status-mission-container" style="margin-bottom: 1.5rem;">
+      <div class="dashboard-status-filters" style="display: none;">
+        <select id="status-year-select" class="dashboard-filter-select">
+          <!-- 연도 옵션은 JavaScript에서 동적으로 생성 -->
+        </select>
+        <select id="status-month-select" class="dashboard-filter-select">
+          <option value="0">전체</option>
+          <option value="1">1월</option>
+          <option value="2">2월</option>
+          <option value="3">3월</option>
+          <option value="4">4월</option>
+          <option value="5">5월</option>
+          <option value="6">6월</option>
+          <option value="7">7월</option>
+          <option value="8">8월</option>
+          <option value="9">9월</option>
+          <option value="10">10월</option>
+          <option value="11">11월</option>
+          <option value="12">12월</option>
+        </select>
+      </div>
+      <div class="dashboard-status-grid" id="status-count-list">
+        <div class="dashboard-status-card">
+          <div class="status-card-label">접수</div>
+          <div class="status-card-count" id="status-접수">0</div>
+          <div class="status-card-amount" id="amount-접수">0원</div>
+        </div>
+        <div class="dashboard-status-card">
+          <div class="status-card-label">발송 완료</div>
+          <div class="status-card-count" id="status-발송완료">0</div>
+          <div class="status-card-amount" id="amount-발송완료">0원</div>
+        </div>
+        <div class="dashboard-status-card">
+          <div class="status-card-label">협의 중</div>
+          <div class="status-card-count" id="status-협의중">0</div>
+          <div class="status-card-amount" id="amount-협의중">0원</div>
+        </div>
+        <div class="dashboard-status-card">
+          <div class="status-card-label">계약 확정</div>
+          <div class="status-card-count" id="status-계약확정">0</div>
+          <div class="status-card-amount" id="amount-계약확정">0원</div>
+        </div>
+        <div class="dashboard-status-card">
+          <div class="status-card-label">계약 미체결</div>
+          <div class="status-card-count" id="status-계약미체결">0</div>
+          <div class="status-card-amount" id="amount-계약미체결">0원</div>
+        </div>
+        <div class="dashboard-status-card">
+          <div class="status-card-label">계약 완료</div>
+          <div class="status-card-count" id="status-계약완료">0</div>
+          <div class="status-card-amount" id="amount-계약완료">0원</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="page-section--no-border">
+      <h1>진행 현황</h1>
+      <p class="page-section-subtitle">
+        고객사별 제안·견적·계약 진행 상태를 확인합니다.
+      </p>
+
+      <!-- 검색 영역 -->
+      <div class="search-section">
+        <!-- 기본 검색 영역 (텍스트 검색) -->
+        <div class="search-row search-row--simple">
+          <div class="form-field form-field--flex">
+            <div class="search-input-group">
+              <input type="text" id="search-text" class="form-input" placeholder="견적서명, 비고 등 검색">
+              <button type="button" id="btn-search-text" class="btn-icon btn-icon--search" aria-label="검색">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="9" cy="9" r="5.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <button type="button" id="btn-advanced-search" class="btn-icon" aria-label="상세 검색">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.5 5C2.5 4.30964 3.05964 3.75 3.75 3.75H16.25C16.9404 3.75 17.5 4.30964 17.5 5C17.5 5.69036 16.9404 6.25 16.25 6.25H3.75C3.05964 6.25 2.5 5.69036 2.5 5Z" fill="currentColor"/>
+                  <path d="M2.5 10C2.5 9.30964 3.05964 8.75 3.75 8.75H16.25C16.9404 8.75 17.5 9.30964 17.5 10C17.5 10.6904 16.9404 11.25 16.25 11.25H3.75C3.05964 11.25 2.5 10.6904 2.5 10Z" fill="currentColor"/>
+                  <path d="M3.75 13.75C3.05964 13.75 2.5 14.3096 2.5 15C2.5 15.6904 3.05964 16.25 3.75 16.25H16.25C16.9404 16.25 17.5 15.6904 17.5 15C17.5 14.3096 16.9404 13.75 16.25 13.75H3.75Z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 상세 검색 영역 (토글) -->
+        <div class="search-advanced" id="search-advanced" style="display: none;">
+          <div class="search-row search-row--advanced">
+            <div class="form-field">
+              <span class="form-label">사용 목적</span>
+              <select id="search-purpose" class="form-input">
+                <option value="">전체</option>
+                <!-- 동적으로 생성됩니다 -->
+              </select>
+            </div>
+            <div class="form-field">
+              <span class="form-label">고객사명</span>
+              <select id="search-company" class="form-input">
+                <option value="">전체</option>
+                <!-- 동적으로 생성됩니다 -->
+              </select>
+            </div>
+            <div class="form-field">
+              <span class="form-label">견적 담당자</span>
+              <select id="search-manager" class="form-input">
+                <option value="">전체</option>
+                <!-- 동적으로 생성됩니다 -->
+              </select>
+            </div>
+            <div class="form-field">
+              <span class="form-label">시작일</span>
+              <input type="date" id="search-date-from" class="form-input">
+            </div>
+            <div class="form-field">
+              <span class="form-label">종료일</span>
+              <input type="date" id="search-date-to" class="form-input">
+            </div>
+          </div>
+          <div class="search-row search-row--actions">
+            <div class="form-field form-field--centered search-actions-group">
+              <button type="button" id="btn-search" class="btn primary btn-search-action">검색</button>
+              <button type="button" id="btn-reset-search" class="btn secondary btn-search-action">초기화</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 상태별 탭 -->
+      <div class="status-tabs" style="margin-bottom: 1.5rem;">
+        <button type="button" class="status-tab active" data-status="all">전체</button>
+        <button type="button" class="status-tab" data-status="접수">접수</button>
+        <button type="button" class="status-tab" data-status="발송 완료">발송 완료</button>
+        <button type="button" class="status-tab" data-status="협의 중">협의 중</button>
+        <button type="button" class="status-tab" data-status="계약 확정">계약 확정</button>
+        <button type="button" class="status-tab" data-status="계약 미체결">계약 미체결</button>
+        <button type="button" class="status-tab" data-status="계약 완료">계약 완료</button>
+      </div>
+
+      <div class="status-cards-container">
+        <div class="status-cards-grid" id="status-cards-grid">
+          <!-- 동적으로 생성됩니다 -->
+        </div>
+        
+        <!-- 페이징 -->
+        <div class="pagination" id="pagination">
+          <!-- 동적으로 생성됩니다 -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/status.js"></script>
+</body>
+</html>
+
+

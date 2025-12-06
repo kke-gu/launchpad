@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+  견적서 상세 페이지
+  - 견적서의 상세 정보를 표시하고 수정/삭제/PDF 저장 기능 제공
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>견적서 상세 - Growth Launchpad</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/quote.css">
+</head>
+<body class="page-quote">
+  <!-- 공통 헤더 / GNB -->
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Growth Launchpad 홈">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="m-letter">m</span>
+        <span class="tm-symbol">™</span>
+      </div>
+      <div>
+        <p class="brand-label">맑은소프트</p>
+        <p class="brand-sub">Growth Launchpad</p>
+      </div>
+    </a>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="메인 메뉴 열기">
+      ☰
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <button class="mobile-menu-close" type="button" aria-label="메인 메뉴 닫기">×</button>
+      <a href="products.html" class="nav-pill">상품</a>
+      <a href="quote.html" class="nav-pill">견적 작성</a>
+      <a href="status.html" class="nav-pill">진행 현황</a>
+      <a href="resources.html" class="nav-pill">자료실</a>
+
+      <!-- 모바일 전용 추가 메뉴 -->
+      <div class="main-nav-extra">
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">회사소개서</a>
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+        <a href="https://help.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">고객센터</a>
+        <a href="login.html" class="nav-pill nav-pill--primary">로그인</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">회사소개서</a>
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+      <a href="https://help.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">고객센터</a>
+      <a href="login.html" class="btn primary">로그인</a>
+      <div class="mobile-header-cta">
+        <a href="login.html" class="btn primary full-width">로그인</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 견적서 상세 정보 -->
+  <main class="page-main">
+    <section class="page-section page-section--no-border">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div>
+          <h1>견적서 상세</h1>
+          <p class="page-section-subtitle" style="margin-bottom: 0;">
+            견적서의 상세 정보를 확인합니다.
+          </p>
+        </div>
+        <div class="quote-detail-actions" id="quote-detail-actions" style="display: flex; gap: 0.5rem;">
+          <!-- 동적으로 버튼이 추가됩니다 -->
+        </div>
+      </div>
+
+      <div id="quote-detail-content">
+        <!-- 견적서 상세 정보가 여기에 동적으로 표시됩니다 -->
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/quote-detail.js"></script>
+</body>
+</html>
+
+

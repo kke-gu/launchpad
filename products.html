@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+  상품 페이지
+  - 맑은소프트 상품별 제안서, 요금, 데모, 고객사 사례 목록 진입점
+  - 상품 등록, 수정, 삭제 기능 포함
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 - Growth Launchpad</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+  <link rel="stylesheet" href="assets/css/products.css">
+</head>
+<body>
+  <!-- 공통 헤더 / GNB -->
+  <header class="site-header">
+    <a href="index.html" class="brand" aria-label="Growth Launchpad 홈">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="m-letter">m</span>
+        <span class="tm-symbol">™</span>
+      </div>
+      <div>
+        <p class="brand-label">맑은소프트</p>
+        <p class="brand-sub">Growth Launchpad</p>
+      </div>
+    </a>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="메인 메뉴 열기">
+      ☰
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <button class="mobile-menu-close" type="button" aria-label="메인 메뉴 닫기">×</button>
+      <a href="products.html" class="nav-pill active">상품</a>
+      <a href="quote.html" class="nav-pill">견적 작성</a>
+      <a href="status.html" class="nav-pill">진행 현황</a>
+      <a href="resources.html" class="nav-pill">자료실</a>
+
+      <!-- 모바일 전용 추가 메뉴 -->
+      <div class="main-nav-extra">
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">회사소개서</a>
+        <a href="https://www.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+        <a href="https://help.malgnsoft.com/main/index.jsp" class="nav-pill nav-pill--secondary" target="_blank" rel="noopener noreferrer">고객센터</a>
+        <a href="login.html" class="nav-pill nav-pill--primary">로그인</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">회사소개서</a>
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+      <a href="https://help.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">고객센터</a>
+      <a href="login.html" class="btn primary">로그인</a>
+      <div class="mobile-header-cta">
+        <a href="login.html" class="btn primary full-width">로그인</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 상품 리스트 영역 -->
+  <main class="page-main">
+    <section class="page-section--no-border">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div>
+          <h1>상품</h1>
+          <p class="page-section-subtitle" style="margin-bottom: 0;">
+            제안서, 요금, 데모, 고객사 사례를 바로 확인하고 영업 대응 속도를 높이세요.
+          </p>
+        </div>
+        <div>
+          <button type="button" class="btn primary" id="btn-add-product">상품 등록</button>
+        </div>
+      </div>
+      <div class="product-grid" id="product-list">
+        <!-- 상품 카드들이 여기에 동적으로 추가됩니다 -->
+      </div>
+    </section>
+  </main>
+
+  <!-- 상품 등록/수정 모달 -->
+  <div class="modal" id="product-modal" style="display: none;">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">상품 등록</h2>
+        <button type="button" class="modal-close" aria-label="닫기">×</button>
+      </div>
+      <form id="product-form" class="product-form">
+        <input type="hidden" id="product-id" name="id">
+        
+        <div class="form-group">
+          <label for="product-name">상품명 <span class="required">*</span></label>
+          <input type="text" id="product-name" name="name" required class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="product-description">상품 간단 설명</label>
+          <textarea id="product-description" name="description" rows="3" class="form-input"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="product-proposal-file">제안서 파일</label>
+          <input type="file" id="product-proposal-file" name="proposalFile" accept=".pdf,.doc,.docx,.ppt,.pptx" class="form-input">
+          <div class="file-inline">
+            <div id="proposal-file-name" class="file-name-display" style="display: none;"></div>
+            <button type="button" id="btn-remove-proposal" class="btn-file-remove" style="display: none;">삭제</button>
+          </div>
+        </div>
+
+        <!-- 기본 영역 -->
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <label>기본 영역</label>
+            <button type="button" class="btn small secondary" id="btn-add-basic">+ 추가</button>
+          </div>
+          <div id="basic-areas" class="dynamic-list"></div>
+        </div>
+
+        <!-- 데모 영역 -->
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <label>데모 영역</label>
+            <button type="button" class="btn small secondary" id="btn-add-demo">+ 추가</button>
+          </div>
+          <div id="demo-areas" class="dynamic-list"></div>
+        </div>
+
+        <!-- 고객 사례 영역 -->
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <label>고객 사례 영역</label>
+            <button type="button" class="btn small secondary" id="btn-add-case">+ 추가</button>
+          </div>
+          <div id="case-areas" class="dynamic-list"></div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn secondary" id="btn-cancel">취소</button>
+          <button type="submit" class="btn primary">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/products.js"></script>
+</body>
+</html>

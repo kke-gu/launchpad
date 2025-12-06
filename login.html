@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+  로그인 페이지
+  - Growth Launchpad 접속을 위한 로그인 화면
+  - 공통 GNB + 단일 로그인 폼
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 - Growth Launchpad</title>
+  <link rel="stylesheet" href="assets/css/common.css">
+</head>
+<body class="page-login">
+  <!-- 공통 헤더 / GNB (로그인 페이지에서는 숨김) -->
+  <header class="site-header" style="display: none;">
+    <a href="index.html" class="brand" aria-label="Growth Launchpad 홈">
+      <div class="brand-mark" aria-hidden="true">
+        <span class="m-letter">m</span>
+        <span class="tm-symbol">™</span>
+      </div>
+      <div>
+        <p class="brand-label">맑은소프트</p>
+        <p class="brand-sub">Growth Launchpad</p>
+      </div>
+    </a>
+
+    <button class="mobile-menu-toggle" type="button" aria-label="메인 메뉴 열기">
+      ☰
+    </button>
+
+    <nav class="main-nav" aria-label="주요 메뉴">
+      <a href="products.html" class="nav-pill">상품</a>
+      <a href="quote.html" class="nav-pill">견적 작성</a>
+      <a href="status.html" class="nav-pill">진행 현황</a>
+      <a href="resources.html" class="nav-pill">자료실</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">회사소개서</a>
+      <a href="https://www.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">대표 홈페이지</a>
+      <a href="https://help.malgnsoft.com/main/index.jsp" class="btn-link" target="_blank" rel="noopener noreferrer">고객센터</a>
+      <a href="login.html" class="btn primary">로그인</a>
+      <div class="mobile-header-cta">
+        <a href="login.html" class="btn primary full-width">로그인</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 로그인 폼 영역 -->
+  <main class="page-main">
+    <section class="page-section page-section--center page-section--no-border">
+      <div class="login-brand" style="text-align: left; margin-bottom: 2rem;">
+        <div class="brand" style="display: inline-flex; align-items: center; gap: 1rem; color: inherit;">
+          <div class="brand-mark" aria-hidden="true">
+            <span class="m-letter">m</span>
+            <span class="tm-symbol">™</span>
+          </div>
+          <div style="text-align: left;">
+            <p class="brand-label" style="margin: 0; font-size: 1.2rem; font-weight: 600; text-align: left;">맑은소프트</p>
+            <p class="brand-sub" style="margin: 0; font-size: 0.9rem; color: var(--muted); text-align: left;">Growth Launchpad</p>
+          </div>
+        </div>
+      </div>
+
+      <form class="form-card" action="#" method="post">
+        <h1 style="margin-top: 0; margin-bottom: 0.5rem; font-size: 1.8rem;">성장을 위한 출발점</h1>
+        <p class="page-section-subtitle" style="margin-top: 0; margin-bottom: 1.8rem; color: var(--muted);">Growth Launchpad로 지금 시작하세요.</p>
+        <label class="form-field">
+          <span class="form-label">이메일</span>
+          <input type="email" name="email" required placeholder="name@malgeunsoft.com">
+        </label>
+        <label class="form-field">
+          <span class="form-label">비밀번호</span>
+          <input type="password" name="password" required placeholder="비밀번호를 입력하세요">
+        </label>
+        <label class="form-field" style="flex-direction: row; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;">
+          <input type="checkbox" id="remember-login" name="remember-login" style="width: auto; margin: 0;">
+          <span class="form-label" style="margin: 0; font-weight: normal;">로그인 저장</span>
+        </label>
+        <button type="submit" class="btn primary full-width">로그인</button>
+        
+        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+          <p style="font-size: 0.9rem; color: var(--muted); margin-bottom: 0.75rem; text-align: center;">테스트 계정으로 로그인</p>
+          <div style="display: flex; flex-direction: row; gap: 0.5rem;">
+            <button type="button" class="btn secondary test-account-btn" data-email="sales1@malgeunsoft.com" data-password="sales123" style="flex: 1;">
+              계정1
+            </button>
+            <button type="button" class="btn secondary test-account-btn" data-email="sales2@malgeunsoft.com" data-password="sales456" style="flex: 1;">
+              계정2
+            </button>
+            <button type="button" class="btn secondary test-account-btn" data-email="sales3@malgeunsoft.com" data-password="sales789" style="flex: 1;">
+              계정3
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/login.js"></script>
+</body>
+</html>
+
+
