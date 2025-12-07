@@ -7,6 +7,170 @@
 const QUOTES_STORAGE_KEY = 'growth_launchpad_quotes';
 const ITEMS_PER_PAGE = 10;
 
+// 고정 견적서 데이터 (홍길동 계정으로 작성된 견적서 - 항상 표시됨)
+const FIXED_QUOTES = [
+    {
+        id: 'fixed-quote-1',
+        customer: {
+            companyName: '㈜테크솔루션',
+            contactName: '김담당',
+            position: '대표이사',
+            phone: '010-1234-5678',
+            email: 'contact@techsolution.com'
+        },
+        recipient: '㈜테크솔루션',
+        reference: 'REF-2025-001',
+        quoteTitle: '㈜테크솔루션 견적서',
+        quoteDate: '2025-01-15',
+        items: [
+            { category: '기본', detail: '기본 라이선스', period: '12', quantity: 10, price: 100000, amount: 1000000, note: '' },
+            { category: '추가', detail: '추가 모듈', period: '12', quantity: 5, price: 50000, amount: 250000, note: '옵션' }
+        ],
+        paymentInfo: '계좌이체',
+        depositInfo: '계약금 30%',
+        managerName: '홍길동',
+        managerPosition: '팀장',
+        managerPhone: '010-1234-5678',
+        managerEmail: 'sales1@malgeunsoft.com',
+        validity: '30일',
+        product: '범용 LMS',
+        licenseCount: 10,
+        memo: '',
+        purpose: '학원/학교',
+        isRequote: false,
+        isTemp: false,
+        status: '접수',
+        statusHistory: {
+            '접수': '2025-01-15T00:00:00.000Z'
+        },
+        totalAmount: 1250000,
+        createdAt: '2025-01-15T00:00:00.000Z',
+        updatedAt: '2025-01-15T00:00:00.000Z'
+    },
+    {
+        id: 'fixed-quote-2',
+        customer: {
+            companyName: '㈜디지털교육',
+            contactName: '이담당',
+            position: '대표이사',
+            phone: '010-2345-6789',
+            email: 'contact@digitaledu.com'
+        },
+        recipient: '㈜디지털교육',
+        reference: 'REF-2025-002',
+        quoteTitle: '㈜디지털교육 견적서',
+        quoteDate: '2025-02-20',
+        items: [
+            { category: '기본', detail: '기본 라이선스', period: '12', quantity: 20, price: 100000, amount: 2000000, note: '' },
+            { category: '서비스', detail: '유지보수', period: '12', quantity: 1, price: 200000, amount: 200000, note: '연간' }
+        ],
+        paymentInfo: '계좌이체',
+        depositInfo: '계약금 30%',
+        managerName: '홍길동',
+        managerPosition: '팀장',
+        managerPhone: '010-1234-5678',
+        managerEmail: 'sales1@malgeunsoft.com',
+        validity: '30일',
+        product: '공공 LMS',
+        licenseCount: 20,
+        memo: '',
+        purpose: '공공기관 사용',
+        isRequote: false,
+        isTemp: false,
+        status: '발송 완료',
+        statusHistory: {
+            '접수': '2025-02-20T00:00:00.000Z',
+            '발송 완료': '2025-02-25T00:00:00.000Z'
+        },
+        totalAmount: 2200000,
+        createdAt: '2025-02-20T00:00:00.000Z',
+        updatedAt: '2025-02-25T00:00:00.000Z'
+    },
+    {
+        id: 'fixed-quote-3',
+        customer: {
+            companyName: '㈜스마트에듀',
+            contactName: '박담당',
+            position: '대표이사',
+            phone: '010-3456-7890',
+            email: 'contact@smartedu.com'
+        },
+        recipient: '㈜스마트에듀',
+        reference: 'REF-2025-003',
+        quoteTitle: '㈜스마트에듀 견적서',
+        quoteDate: '2025-03-10',
+        items: [
+            { category: '기본', detail: '기본 라이선스', period: '12', quantity: 15, price: 100000, amount: 1500000, note: '' },
+            { category: '추가', detail: '추가 모듈', period: '12', quantity: 3, price: 50000, amount: 150000, note: '옵션' },
+            { category: '서비스', detail: '유지보수', period: '12', quantity: 1, price: 200000, amount: 200000, note: '연간' }
+        ],
+        paymentInfo: '계좌이체',
+        depositInfo: '계약금 30%',
+        managerName: '홍길동',
+        managerPosition: '팀장',
+        managerPhone: '010-1234-5678',
+        managerEmail: 'sales1@malgeunsoft.com',
+        validity: '30일',
+        product: '환급 LMS',
+        licenseCount: 15,
+        memo: '',
+        purpose: '내일배움카드',
+        isRequote: false,
+        isTemp: false,
+        status: '협의 중',
+        statusHistory: {
+            '접수': '2025-03-10T00:00:00.000Z',
+            '발송 완료': '2025-03-15T00:00:00.000Z',
+            '협의 중': '2025-03-20T00:00:00.000Z'
+        },
+        totalAmount: 1850000,
+        createdAt: '2025-03-10T00:00:00.000Z',
+        updatedAt: '2025-03-20T00:00:00.000Z'
+    },
+    {
+        id: 'fixed-quote-4',
+        customer: {
+            companyName: '㈜에듀테크',
+            contactName: '최담당',
+            position: '대표이사',
+            phone: '010-4567-8901',
+            email: 'contact@edutech.com'
+        },
+        recipient: '㈜에듀테크',
+        reference: 'REF-2025-004',
+        quoteTitle: '㈜에듀테크 견적서',
+        quoteDate: '2025-04-05',
+        items: [
+            { category: '기본', detail: '기본 라이선스', period: '12', quantity: 30, price: 100000, amount: 3000000, note: '' },
+            { category: '서비스', detail: '유지보수', period: '12', quantity: 1, price: 300000, amount: 300000, note: '연간' }
+        ],
+        paymentInfo: '계좌이체',
+        depositInfo: '계약금 30%',
+        managerName: '홍길동',
+        managerPosition: '팀장',
+        managerPhone: '010-1234-5678',
+        managerEmail: 'sales1@malgeunsoft.com',
+        validity: '30일',
+        product: '위캔디오',
+        licenseCount: 30,
+        memo: '',
+        purpose: '개인 사업자',
+        isRequote: false,
+        isTemp: false,
+        status: '계약 완료',
+        statusHistory: {
+            '접수': '2025-04-05T00:00:00.000Z',
+            '발송 완료': '2025-04-10T00:00:00.000Z',
+            '협의 중': '2025-04-15T00:00:00.000Z',
+            '계약 확정': '2025-04-20T00:00:00.000Z',
+            '계약 완료': '2025-04-25T00:00:00.000Z'
+        },
+        totalAmount: 3300000,
+        createdAt: '2025-04-05T00:00:00.000Z',
+        updatedAt: '2025-04-25T00:00:00.000Z'
+    }
+];
+
 // 검색 및 필터 상태
 let currentFilters = {
     status: 'all',
@@ -18,10 +182,30 @@ let currentFilters = {
     dateTo: ''
 };
 
-// 견적서 목록 가져오기
+// 견적서 목록 가져오기 (고정 견적서 + 로컬 스토리지 견적서)
 function getQuotes() {
+    // 고정 견적서 먼저 가져오기
+    const fixedQuotes = FIXED_QUOTES.map(quote => ({
+        ...quote,
+        isFixed: true // 고정 견적서 표시용 플래그
+    }));
+    
+    // 로컬 스토리지에서 견적서 가져오기
     const stored = localStorage.getItem(QUOTES_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
+    let localQuotes = stored ? JSON.parse(stored) : [];
+    
+    // 로컬 스토리지에 고정 견적서가 저장되어 있는 경우 제거
+    const fixedQuoteIds = FIXED_QUOTES.map(q => q.id);
+    const hasFixedQuotes = localQuotes.some(q => fixedQuoteIds.includes(q.id) || (typeof q.id === 'string' && q.id.startsWith('fixed-quote-')));
+    
+    if (hasFixedQuotes) {
+        localQuotes = localQuotes.filter(q => !fixedQuoteIds.includes(q.id) && !(typeof q.id === 'string' && q.id.startsWith('fixed-quote-')));
+        // 정리된 견적서 목록 저장
+        localStorage.setItem(QUOTES_STORAGE_KEY, JSON.stringify(localQuotes));
+    }
+    
+    // 고정 견적서와 로컬 견적서 합치기 (고정 견적서가 먼저)
+    return [...fixedQuotes, ...localQuotes];
 }
 
 // 날짜 포맷팅
