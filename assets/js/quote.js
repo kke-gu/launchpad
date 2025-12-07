@@ -2204,12 +2204,12 @@ function renderQuotePreview(data, container) {
                 <table class="quote-table">
                     <thead>
                         <tr>
-                            <th style="width: 250px;">구분</th>
-                            <th>세부 항목</th>
-                            <th style="width: 120px;">기본계약기간(월)</th>
-                            <th style="width: 100px;">수량</th>
-                            <th style="width: 120px;">단가</th>
-                            <th style="width: 120px;">공급가액</th>
+                            <th style="width: 15%;">구분</th>
+                            <th style="width: 25%;">세부 항목</th>
+                            <th style="width: 11%;">기본계약기간(월)</th>
+                            <th style="width: 6%;">수량</th>
+                            <th style="width: 10%;">단가</th>
+                            <th style="width: 10%;">공급가액</th>
                             <th>비고</th>
                         </tr>
                     </thead>
@@ -2287,183 +2287,8 @@ function printQuote() {
     const previewContent = document.getElementById('quote-preview-content');
     if (!previewContent) return;
     
-    // 새 창에 인쇄용 HTML 생성
-    const printWindow = window.open('', '_blank');
-    const printContent = previewContent.innerHTML;
-    
-    printWindow.document.write(`
-        <!DOCTYPE html>
-        <html lang="ko">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>견적서 인쇄</title>
-            <style>
-                @page {
-                    size: A4;
-                    margin: 0;
-                }
-                body {
-                    margin: 0;
-                    padding: 20mm;
-                    font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
-                    font-size: 12pt;
-                    color: #1c2533;
-                }
-                .quote-company-details {
-                    margin-bottom: 2rem;
-                    padding: 1.5rem;
-                    background: #f6f8fb;
-                    border-radius: 12px;
-                    border: 1px solid #e2e6ef;
-                }
-                .quote-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: flex-start;
-                    margin-bottom: 1.25rem;
-                    padding-bottom: 1.25rem;
-                    border-bottom: 1px solid #e2e6ef;
-                }
-                .quote-header-left {
-                    display: flex;
-                    align-items: center;
-                    gap: 1rem;
-                }
-                .quote-logo {
-                    width: 46px;
-                    height: 46px;
-                    border-radius: 50%;
-                    background: #0F91D0;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-shrink: 0;
-                    position: relative;
-                    font-family: "NanumBarunGothic", sans-serif;
-                    font-weight: 700;
-                    color: #fff;
-                    line-height: 1;
-                }
-                .quote-logo-m {
-                    font-size: 1.2rem;
-                    font-weight: 700;
-                    letter-spacing: -0.02em;
-                    transform: scaleY(1.3);
-                    display: inline-block;
-                    line-height: 1;
-                }
-                .quote-logo-tm {
-                    position: absolute;
-                    top: 13px;
-                    right: 8px;
-                    font-size: 0.6rem;
-                    font-weight: 400;
-                    line-height: 1;
-                }
-                .quote-company-info {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.25rem;
-                }
-                .quote-company-name {
-                    margin: 0;
-                    font-size: 1.3rem;
-                    font-weight: 700;
-                    color: #1c2533;
-                }
-                .quote-company-slogan {
-                    margin: 0;
-                    font-size: 0.9rem;
-                    color: #6c7686;
-                }
-                .quote-header-right {
-                    text-align: right;
-                }
-                .quote-title {
-                    margin: 0;
-                    font-size: 2rem;
-                    font-weight: 700;
-                    color: #1c2533;
-                }
-                .quote-company-info-details {
-                    margin-top: 0.75rem;
-                }
-                .quote-company-info-details p {
-                    margin: 0.35rem 0;
-                    font-size: 0.85rem;
-                    color: #6c7686;
-                    line-height: 1.6;
-                }
-                .quote-subsection {
-                    margin-bottom: 1.5rem;
-                    padding-bottom: 1rem;
-                    border-bottom: 1px solid #e2e6ef;
-                }
-                .quote-subsection:last-of-type {
-                    border-bottom: none;
-                }
-                .quote-subsection-title {
-                    font-size: 1.1rem;
-                    font-weight: 600;
-                    margin-bottom: 1rem;
-                    color: #1c2533;
-                }
-                .form-grid {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    gap: 1rem;
-                    margin-bottom: 1rem;
-                }
-                .form-field {
-                    margin-bottom: 0.8rem;
-                }
-                .form-label {
-                    font-size: 0.9rem;
-                    color: #6c7686;
-                    margin-bottom: 0.35rem;
-                    display: block;
-                }
-                .form-input {
-                    font-size: 0.95rem;
-                    color: #1c2533;
-                    padding: 0.5rem 0;
-                }
-                .quote-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    font-size: 0.9rem;
-                    margin-top: 1rem;
-                }
-                .quote-table th,
-                .quote-table td {
-                    padding: 0.75rem 0.5rem;
-                    border: 1px solid #e2e6ef;
-                    text-align: left;
-                }
-                .quote-table th {
-                    background: #f6f8fb;
-                    font-weight: 600;
-                    color: #1c2533;
-                    text-align: center;
-                }
-                .quote-table td {
-                    background: #ffffff;
-                }
-            </style>
-        </head>
-        <body>
-            ${printContent}
-        </body>
-        </html>
-    `);
-    
-    printWindow.document.close();
-    
-    // 인쇄 대화상자 열기
-    setTimeout(() => {
-        printWindow.print();
-    }, 250);
+    // 현재 페이지에서 직접 인쇄 (CSS의 @media print 스타일 활용)
+    window.print();
 }
 
 // 견적서 PDF 저장
@@ -2472,7 +2297,19 @@ function saveQuoteAsPDF() {
     if (!previewContent) return;
     
     // jsPDF와 html2canvas가 로드되었는지 확인
-    if (typeof window.jspdf === 'undefined') {
+    let JsPDF;
+    if (typeof window.jspdf !== 'undefined') {
+        // jspdf.umd.min.js를 사용하는 경우
+        if (window.jspdf.jsPDF) {
+            JsPDF = window.jspdf.jsPDF;
+        } else {
+            // 구조 분해 할당 시도
+            const { jsPDF } = window.jspdf;
+            JsPDF = jsPDF;
+        }
+    } else if (typeof window.jsPDF !== 'undefined') {
+        JsPDF = window.jsPDF;
+    } else {
         alert('PDF 라이브러리를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
         return;
     }
@@ -2490,8 +2327,8 @@ function saveQuoteAsPDF() {
     }
     
     try {
-        // 미리보기 영역의 실제 내용을 가져옴
-        const quotePreviewPaper = previewContent.querySelector('.quote-preview-paper');
+        // 미리보기 영역의 실제 내용을 가져옴 (previewContent 자체가 quote-preview-paper)
+        const quotePreviewPaper = previewContent;
         if (!quotePreviewPaper) {
             throw new Error('견적서 미리보기 영역을 찾을 수 없습니다.');
         }
@@ -2505,32 +2342,40 @@ function saveQuoteAsPDF() {
             width: quotePreviewPaper.scrollWidth,
             height: quotePreviewPaper.scrollHeight
         }).then(canvas => {
-            const { jsPDF } = window.jspdf;
-            
             // A4 크기 계산 (mm 단위)
             const imgWidth = 210; // A4 width in mm
             const pageHeight = 297; // A4 height in mm
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
             
-            const doc = new jsPDF({
+            const doc = new JsPDF({
                 orientation: 'portrait',
                 unit: 'mm',
                 format: 'a4'
             });
             
-            let position = 0;
-            
-            // 첫 페이지 추가
-            doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-            
-            // 여러 페이지가 필요한 경우 추가
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
-                doc.addPage();
+            // 이미지가 한 페이지에 들어가는 경우
+            if (imgHeight <= pageHeight) {
+                doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
+            } else {
+                // 여러 페이지에 나누어 표시
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                // 첫 페이지 추가
                 doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
+                
+                // 추가 페이지가 필요한 경우만 추가 (position이 -imgHeight보다 크거나 같을 때만)
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    // position이 -imgHeight보다 작으면 이미지가 완전히 페이지 밖에 있으므로 중단
+                    if (position <= -imgHeight) {
+                        break;
+                    }
+                    doc.addPage();
+                    doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
             }
             
             // PDF 저장

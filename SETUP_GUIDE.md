@@ -187,3 +187,6 @@ async function saveQuote(quote) {
 3. 프론트엔드 코드 수정 (점진적으로 진행 가능)
 4. 테스트 및 배포
 
+
+
+

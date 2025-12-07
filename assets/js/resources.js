@@ -168,6 +168,8 @@ function renderResources(category = 'all', searchText = '') {
                 .replace(/^-|-$/g, '');
         }
         
+        const authorName = resource.authorName || '알 수 없음';
+        
         return `
             <article class="resource-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
@@ -179,6 +181,9 @@ function renderResources(category = 'all', searchText = '') {
                 </div>
                 <p class="resource-card-meta">
                     ${fileExt ? fileExt + ' · ' : ''}최신 업데이트: ${updatedDate}
+                </p>
+                <p class="resource-card-meta" style="margin-top: 0.25rem; color: var(--muted); font-size: 0.85rem;">
+                    등록자: ${escapeHtml(authorName)}
                 </p>
                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
                     ${downloadLink}

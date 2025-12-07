@@ -196,3 +196,6 @@ function parseQuote(row) {
   };
 }
 
+
+
+

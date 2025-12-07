@@ -88,3 +88,6 @@ CREATE INDEX IF NOT EXISTS idx_quotes_quote_date ON quotes(quote_date);
 CREATE INDEX IF NOT EXISTS idx_products_created_by ON products(created_by);
 CREATE INDEX IF NOT EXISTS idx_resources_category ON resources(category);
 
+
+
+

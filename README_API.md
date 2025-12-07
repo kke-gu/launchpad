@@ -61,3 +61,6 @@ npx wrangler d1 execute launchpad-db --remote --file=./migrations/0001_initial_s
 
 변경사항을 GitHub에 푸시하면 Cloudflare Pages가 자동으로 배포합니다.
 
+
+
+

@@ -750,6 +750,7 @@ function renderActionButtons(quote) {
     }
     
     buttonsHTML += `
+        <button type="button" id="btn-print-quote" class="btn secondary">인쇄</button>
         <button type="button" id="btn-pdf-save" class="btn secondary">PDF 저장</button>
         <a href="status.html" class="btn ghost">목록</a>
     `;
@@ -775,6 +776,13 @@ function renderActionButtons(quote) {
         }
     }
     
+    const printBtn = document.getElementById('btn-print-quote');
+    if (printBtn) {
+        printBtn.addEventListener('click', () => {
+            printQuote();
+        });
+    }
+    
     const pdfBtn = document.getElementById('btn-pdf-save');
     if (pdfBtn) {
         pdfBtn.addEventListener('click', () => {
@@ -792,9 +800,203 @@ function deleteQuote(quoteId) {
     window.location.href = 'status.html';
 }
 
-// PDF 저장
+// 견적서 인쇄
+function printQuote() {
+    // 현재 페이지에서 직접 인쇄 (CSS의 @media print 스타일 활용)
+    window.print();
+}
+
+// 견적서 데이터를 미리보기 형식으로 변환
+function convertQuoteToPreviewData(quote) {
+    return {
+        customer: quote.customer || {},
+        recipient: quote.recipient || '',
+        reference: quote.reference || '',
+        quoteTitle: quote.quoteTitle ? quote.quoteTitle.replace('[임시저장] ', '') : '',
+        quoteDate: quote.quoteDate || '',
+        items: quote.items || [],
+        paymentInfo: quote.paymentInfo || '',
+        depositInfo: quote.depositInfo || '',
+        managerName: quote.managerName || '',
+        managerPosition: quote.managerPosition || '',
+        managerPhone: quote.managerPhone || '',
+        managerEmail: quote.managerEmail || '',
+        validity: quote.validity || ''
+    };
+}
+
+// 견적서 미리보기 렌더링 (quote.js의 renderQuotePreview와 동일)
+function renderQuotePreviewForPDF(data, container) {
+    const dateStr = data.quoteDate ? new Date(data.quoteDate).toLocaleDateString('ko-KR') : new Date().toLocaleDateString('ko-KR');
+    
+    // 총액 계산
+    let totalAmount = 0;
+    data.items.forEach(item => {
+        const amount = parseFloat(item.amount) || 0;
+        totalAmount += amount;
+    });
+    
+    const totalAmountStr = totalAmount.toLocaleString('ko-KR');
+    
+    container.innerHTML = `
+        <div class="quote-company-details">
+            <div class="quote-header">
+                <div class="quote-header-left">
+                    <div class="quote-logo">
+                        <span class="quote-logo-m">m</span>
+                        <span class="quote-logo-tm">™</span>
+                    </div>
+                    <div class="quote-company-info">
+                        <h3 class="quote-company-name">맑은소프트</h3>
+                        <p class="quote-company-slogan">보통 사람들이 만드는 위대한 기업</p>
+                    </div>
+                </div>
+                <div class="quote-header-right">
+                    <h1 class="quote-title">견적서</h1>
+                </div>
+            </div>
+            <div class="quote-company-info-details">
+                <p>서울특별시 구로구 디지털로 288 | tel. 02-857-5445 | fax. 02-6442-7010</p>
+                <p>업태/종목_ 서비스/소프트웨어 원격교육컨텐츠개발및공급</p>
+                <p>사업자등록번호 119-86-39050 | 상호 (주)맑은소프트</p>
+                <p>대표자_하근호</p>
+            </div>
+        </div>
+        
+        <div class="quote-subsection">
+            <h3 class="quote-subsection-title">수신</h3>
+            <div class="form-grid">
+                <div class="form-field">
+                    <span class="form-label">수신자</span>
+                    <div class="form-input">${escapeHtml(data.recipient || '')}</div>
+                </div>
+                <div class="form-field">
+                    <span class="form-label">참조</span>
+                    <div class="form-input">${escapeHtml(data.reference || '')}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-subsection">
+            <h3 class="quote-subsection-title">견적 기본 정보</h3>
+            <div class="form-grid">
+                <div class="form-field">
+                    <span class="form-label">견적서 제목</span>
+                    <div class="form-input">${escapeHtml(data.quoteTitle || '')}</div>
+                </div>
+                <div class="form-field">
+                    <span class="form-label">견적 일자</span>
+                    <div class="form-input">${dateStr}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-subsection">
+            <h3 class="quote-subsection-title">견적 항목</h3>
+            <p style="font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem;">(단위 : 원, VAT 별도)</p>
+            <div class="quote-items-table">
+                <table class="quote-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 15%;">구분</th>
+                            <th style="width: 25%;">세부 항목</th>
+                            <th style="width: 11%;">기본계약기간(월)</th>
+                            <th style="width: 6%;">수량</th>
+                            <th style="width: 10%;">단가</th>
+                            <th style="width: 10%;">공급가액</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.items.map(item => `
+                            <tr>
+                                <td>${escapeHtml(item.category || '')}</td>
+                                <td>${escapeHtml(item.detail || '')}</td>
+                                <td style="text-align: center;">${escapeHtml(item.period || '')}</td>
+                                <td style="text-align: center;">${escapeHtml(item.quantity || '')}</td>
+                                <td style="text-align: right;">${escapeHtml(item.price ? parseFloat(item.price).toLocaleString('ko-KR') : '')}</td>
+                                <td style="text-align: right;">${escapeHtml(item.amount ? parseFloat(item.amount).toLocaleString('ko-KR') : '')}</td>
+                                <td>${escapeHtml(item.note || '')}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 계약 총액 -->
+            <div class="quote-total-section">
+                <div class="quote-total-item">
+                    <span class="quote-total-label">계약 총액 (VAT별도)</span>
+                    <span class="quote-total-amount">${totalAmountStr}원</span>
+                </div>
+                <div class="quote-total-item">
+                    <span class="quote-total-label">계약 총액 (VAT포함)</span>
+                    <span class="quote-total-amount">${(totalAmount * 1.1).toLocaleString('ko-KR')}원</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-subsection">
+            <h3 class="quote-subsection-title">결제 및 담당자 안내</h3>
+            
+            <div class="form-field">
+                <span class="form-label">결제정보</span>
+                <div class="form-input">${escapeHtml(data.paymentInfo || '')}</div>
+            </div>
+
+            <div class="form-field">
+                <span class="form-label">입금 관련</span>
+                <div class="form-input" style="white-space: pre-wrap;">${escapeHtml(data.depositInfo || '')}</div>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-field">
+                    <span class="form-label">담당자 이름</span>
+                    <div class="form-input">${escapeHtml(data.managerName || '')}</div>
+                </div>
+                <div class="form-field">
+                    <span class="form-label">직책</span>
+                    <div class="form-input">${escapeHtml(data.managerPosition || '')}</div>
+                </div>
+                <div class="form-field">
+                    <span class="form-label">연락처</span>
+                    <div class="form-input">${escapeHtml(data.managerPhone || '')}</div>
+                </div>
+                <div class="form-field">
+                    <span class="form-label">이메일</span>
+                    <div class="form-input">${escapeHtml(data.managerEmail || '')}</div>
+                </div>
+            </div>
+
+            <div class="form-field">
+                <span class="form-label">유효기간</span>
+                <div class="form-input" style="white-space: pre-wrap;">${escapeHtml(data.validity || '')}</div>
+            </div>
+        </div>
+    `;
+}
+
+// 견적서 PDF 저장
 function saveQuoteAsPDF(quote) {
-    if (typeof window.jspdf === 'undefined') {
+    if (!quote) {
+        alert('견적서 정보를 찾을 수 없습니다.');
+        return;
+    }
+    
+    // jsPDF와 html2canvas가 로드되었는지 확인
+    let JsPDF;
+    if (typeof window.jspdf !== 'undefined') {
+        // jspdf.umd.min.js를 사용하는 경우
+        if (window.jspdf.jsPDF) {
+            JsPDF = window.jspdf.jsPDF;
+        } else {
+            // 구조 분해 할당 시도
+            const { jsPDF } = window.jspdf;
+            JsPDF = jsPDF;
+        }
+    } else if (typeof window.jsPDF !== 'undefined') {
+        JsPDF = window.jsPDF;
+    } else {
         alert('PDF 라이브러리를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
         return;
     }
@@ -804,6 +1006,7 @@ function saveQuoteAsPDF(quote) {
         return;
     }
     
+    // PDF 생성 중 표시
     const pdfBtn = document.getElementById('btn-pdf-save');
     if (pdfBtn) {
         pdfBtn.disabled = true;
@@ -811,64 +1014,104 @@ function saveQuoteAsPDF(quote) {
     }
     
     try {
-        const quotePreviewPaper = document.querySelector('.quote-section--document');
-        if (!quotePreviewPaper) {
-            throw new Error('견적서 영역을 찾을 수 없습니다.');
-        }
+        // 임시 미리보기 컨테이너 생성 (quote-preview-paper 스타일 적용)
+        const tempContainer = document.createElement('div');
+        tempContainer.className = 'quote-preview-paper';
+        tempContainer.style.position = 'absolute';
+        tempContainer.style.left = '-9999px';
+        tempContainer.style.top = '0';
+        tempContainer.style.width = '210mm';
+        tempContainer.style.minHeight = '297mm';
+        tempContainer.style.background = '#ffffff';
+        tempContainer.style.padding = '15mm';
+        document.body.appendChild(tempContainer);
         
-        html2canvas(quotePreviewPaper, {
-            scale: 2,
-            useCORS: true,
-            logging: false,
-            backgroundColor: '#ffffff',
-            width: quotePreviewPaper.scrollWidth,
-            height: quotePreviewPaper.scrollHeight
-        }).then(canvas => {
-            const { jsPDF } = window.jspdf;
-            
-            const imgWidth = 210;
-            const pageHeight = 297;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            
-            const doc = new jsPDF({
-                orientation: 'portrait',
-                unit: 'mm',
-                format: 'a4'
+        // quote 데이터를 미리보기 형식으로 변환
+        const previewData = convertQuoteToPreviewData(quote);
+        
+        // 미리보기 스타일로 렌더링
+        renderQuotePreviewForPDF(previewData, tempContainer);
+        
+        // 렌더링 완료 대기
+        setTimeout(() => {
+            // HTML을 canvas로 변환
+            html2canvas(tempContainer, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff',
+                width: tempContainer.scrollWidth,
+                height: tempContainer.scrollHeight
+            }).then(canvas => {
+                // 임시 컨테이너 제거
+                document.body.removeChild(tempContainer);
+                
+                // A4 크기 계산 (mm 단위)
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                
+                const doc = new JsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                // 이미지가 한 페이지에 들어가는 경우
+                if (imgHeight <= pageHeight) {
+                    doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, imgWidth, imgHeight);
+                } else {
+                    // 여러 페이지에 나누어 표시
+                    let heightLeft = imgHeight;
+                    let position = 0;
+                    
+                    // 첫 페이지 추가
+                    doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                    
+                    // 추가 페이지가 필요한 경우만 추가 (position이 -imgHeight보다 크거나 같을 때만)
+                    while (heightLeft > 0) {
+                        position = heightLeft - imgHeight;
+                        // position이 -imgHeight보다 작으면 이미지가 완전히 페이지 밖에 있으므로 중단
+                        if (position <= -imgHeight) {
+                            break;
+                        }
+                        doc.addPage();
+                        doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+                }
+                
+                // PDF 저장
+                const customerName = quote?.customer?.companyName || '미정';
+                const fileName = `견적서_${customerName}_${new Date().toISOString().split('T')[0]}.pdf`;
+                doc.save(fileName);
+                
+                // 버튼 상태 복원
+                if (pdfBtn) {
+                    pdfBtn.disabled = false;
+                    pdfBtn.textContent = 'PDF 저장';
+                }
+            }).catch(error => {
+                console.error('PDF 생성 오류:', error);
+                // 임시 컨테이너 제거
+                if (tempContainer.parentNode) {
+                    document.body.removeChild(tempContainer);
+                }
+                alert('PDF 저장 중 오류가 발생했습니다. 인쇄 기능을 사용해주세요.');
+                
+                // 버튼 상태 복원
+                if (pdfBtn) {
+                    pdfBtn.disabled = false;
+                    pdfBtn.textContent = 'PDF 저장';
+                }
             });
-            
-            let position = 0;
-            
-            doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-            
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
-                doc.addPage();
-                doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-            
-            const fileName = `견적서_${quote.customer?.companyName || '미정'}_${new Date().toISOString().split('T')[0]}.pdf`;
-            doc.save(fileName);
-            
-            if (pdfBtn) {
-                pdfBtn.disabled = false;
-                pdfBtn.textContent = 'PDF 저장';
-            }
-        }).catch(error => {
-            console.error('PDF 생성 오류:', error);
-            alert('PDF 저장 중 오류가 발생했습니다.');
-            
-            if (pdfBtn) {
-                pdfBtn.disabled = false;
-                pdfBtn.textContent = 'PDF 저장';
-            }
-        });
+        }, 500);
     } catch (error) {
         console.error('PDF 생성 오류:', error);
-        alert('PDF 저장 중 오류가 발생했습니다.');
+        alert('PDF 저장 중 오류가 발생했습니다. 인쇄 기능을 사용해주세요.');
         
+        // 버튼 상태 복원
         const pdfBtn = document.getElementById('btn-pdf-save');
         if (pdfBtn) {
             pdfBtn.disabled = false;

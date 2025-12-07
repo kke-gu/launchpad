@@ -16,7 +16,7 @@ const INITIAL_ACCOUNTS = [
         companyName: '맑은소프트',
         department: '영업본부',
         teamName: '영업1팀',
-        name: '김영업',
+        name: '홍길동',
         position: '팀장',
         phone: '02-1234-5678',
         mobile: '010-1234-5678'

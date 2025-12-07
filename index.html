@@ -210,9 +210,31 @@
     </section>
   </main>
 
+  <!-- 튜토리얼 오버레이 -->
+  <div id="tutorial-overlay" class="tutorial-overlay" style="display: none;">
+    <div class="tutorial-highlight"></div>
+    <div class="tutorial-tooltip" id="tutorial-tooltip">
+      <div class="tutorial-tooltip-content">
+        <div id="tutorial-icon" class="tutorial-icon" style="display: none;">
+          <!-- 로켓 이미지가 여기에 동적으로 추가됩니다 -->
+        </div>
+        <h3 id="tutorial-title"></h3>
+        <p id="tutorial-description"></p>
+        <div class="tutorial-actions">
+          <button type="button" id="tutorial-skip" class="btn secondary">건너뛰기</button>
+          <button type="button" id="tutorial-next" class="btn primary">다음</button>
+        </div>
+      </div>
+      <div class="tutorial-progress">
+        <span id="tutorial-step">1</span> / <span id="tutorial-total">5</span>
+      </div>
+    </div>
+  </div>
+
   <!-- 공통 스크립트 -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/index.js"></script>
+  <script src="assets/js/tutorial.js"></script>
 </body>
 </html>
 

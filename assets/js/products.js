@@ -156,17 +156,34 @@ function loadProductData(product) {
     document.getElementById('product-name').value = product.name || '';
     document.getElementById('product-description').value = product.description || '';
     
-    if (product.proposalFile) {
+    // 제안서 파일이 있고 실제로 값이 있는 경우에만 표시
+    if (product.proposalFile && product.proposalFile.trim() !== '') {
         const proposalDisplay = document.getElementById('proposal-file-name');
         const proposalRemoveBtn = document.getElementById('btn-remove-proposal');
 
-        proposalDisplay.textContent = product.proposalFile;
-        proposalDisplay.style.display = 'block';
+        if (proposalDisplay) {
+            proposalDisplay.textContent = product.proposalFile.trim();
+            proposalDisplay.style.display = 'block';
+        }
         if (proposalRemoveBtn) {
             proposalRemoveBtn.style.display = 'inline-block';
         }
 
         // 기존 파일이 있는 상태에서 시작하므로 삭제 플래그는 false
+        proposalFileRemoved = false;
+    } else {
+        // 제안서 파일이 없는 경우 명시적으로 숨김
+        const proposalDisplay = document.getElementById('proposal-file-name');
+        const proposalRemoveBtn = document.getElementById('btn-remove-proposal');
+        
+        if (proposalDisplay) {
+            proposalDisplay.textContent = '';
+            proposalDisplay.style.display = 'none';
+        }
+        if (proposalRemoveBtn) {
+            proposalRemoveBtn.style.display = 'none';
+        }
+        
         proposalFileRemoved = false;
     }
     
@@ -420,9 +437,12 @@ document.addEventListener('DOMContentLoaded', function() {
             // 실제 파일 업로드 로직 구현 필요
         } else {
             // 수정 모드에서, 삭제되지 않은 경우에만 기존 파일명 유지
-            const existingFileName = document.getElementById('proposal-file-name').textContent;
-            if (existingFileName && !proposalFileRemoved) {
+            const proposalDisplay = document.getElementById('proposal-file-name');
+            const existingFileName = proposalDisplay ? proposalDisplay.textContent.trim() : '';
+            if (existingFileName && existingFileName !== '' && !proposalFileRemoved) {
                 proposalFile = existingFileName;
+            } else {
+                proposalFile = '';
             }
         }
         

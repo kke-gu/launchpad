@@ -1631,6 +1631,211 @@ nav a,
     border: 1px solid rgba(192, 38, 211, 0.2);
 }
 
+/* 튜토리얼 스타일 */
+.tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.tutorial-highlight {
+    position: absolute;
+    background: rgba(52, 97, 255, 0.1);
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(52, 97, 255, 0.5);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 10000;
+}
+
+.tutorial-tooltip {
+    position: fixed;
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    z-index: 10001;
+    pointer-events: auto;
+    animation: tutorialFadeIn 0.3s ease;
+}
+
+@keyframes tutorialFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tutorial-tooltip-content {
+    position: relative;
+    padding-top: 2.5rem; /* progress를 위한 공간 확보 */
+}
+
+.tutorial-icon {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    margin-top: -2rem;
+    padding-top: 0;
+}
+
+.tutorial-icon svg {
+    width: 180px;
+    height: 180px;
+    animation: rocketFloat 2s ease-in-out infinite;
+}
+
+@keyframes rocketFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.tutorial-tooltip-content h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.tutorial-tooltip-content p {
+    margin: 0 0 1.5rem 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.tutorial-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.tutorial-actions .btn {
+    min-width: 80px;
+}
+
+.tutorial-progress {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    font-weight: 500;
+    z-index: 1;
+}
+
+.tutorial-tooltip.tooltip-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tutorial-tooltip.tooltip-top::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+}
+
+.tutorial-tooltip.tooltip-bottom::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid white;
+}
+
+.tutorial-tooltip.tooltip-left::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid white;
+}
+
+.tutorial-tooltip.tooltip-right::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid white;
+}
+
+@media (max-width: 768px) {
+    /* 모바일에서 튜토리얼 오버레이 숨기기 */
+    #tutorial-overlay {
+        display: none !important;
+    }
+    
+    .tutorial-tooltip {
+        max-width: calc(100vw - 2rem);
+        margin: 1rem;
+    }
+    
+    .tutorial-tooltip.tooltip-center {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+    
+    .tutorial-tooltip.tooltip-top,
+    .tutorial-tooltip.tooltip-bottom,
+    .tutorial-tooltip.tooltip-left,
+    .tutorial-tooltip.tooltip-right {
+        position: fixed;
+        top: auto;
+        bottom: 2rem;
+        left: 1rem;
+        right: 1rem;
+        transform: none;
+    }
+    
+    .tutorial-tooltip.tooltip-top::after,
+    .tutorial-tooltip.tooltip-bottom::after,
+    .tutorial-tooltip.tooltip-left::after,
+    .tutorial-tooltip.tooltip-right::after {
+        display: none;
+    }
+}
+
 .bullet-list {
     padding-left: 1.1rem;
     margin: 0.4rem 0 0;

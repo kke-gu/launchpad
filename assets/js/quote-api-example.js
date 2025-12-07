@@ -77,3 +77,6 @@ async function deleteQuote(id) {
 // 기존: saveQuote(quote);
 // 새로운: await saveQuote(quote);
 
+
+
+
