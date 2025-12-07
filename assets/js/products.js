@@ -89,15 +89,28 @@ function getProducts() {
     
     // 로컬 스토리지에서 상품 가져오기
     const stored = localStorage.getItem(PRODUCTS_STORAGE_KEY);
-    const localProducts = stored ? JSON.parse(stored) : [];
+    let localProducts = stored ? JSON.parse(stored) : [];
+    
+    // 로컬 스토리지에 고정 상품이 저장되어 있는 경우 제거
+    const fixedProductIds = FIXED_PRODUCTS.map(p => p.id);
+    const hasFixedProducts = localProducts.some(p => fixedProductIds.includes(p.id) || (typeof p.id === 'string' && p.id.startsWith('fixed-')));
+    
+    if (hasFixedProducts) {
+        localProducts = localProducts.filter(p => !fixedProductIds.includes(p.id) && !(typeof p.id === 'string' && p.id.startsWith('fixed-')));
+        // 정리된 상품 목록 저장
+        localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(localProducts));
+    }
     
     // 고정 상품과 로컬 상품 합치기 (고정 상품이 먼저)
     return [...fixedProducts, ...localProducts];
 }
 
-// 상품 데이터 저장하기
+// 상품 데이터 저장하기 (고정 상품 제외)
 function saveProducts(products) {
-    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(products));
+    // 고정 상품을 제외한 로컬 상품만 저장
+    const fixedProductIds = FIXED_PRODUCTS.map(p => p.id);
+    const localProducts = products.filter(p => !fixedProductIds.includes(p.id) && !p.isFixed);
+    localStorage.setItem(PRODUCTS_STORAGE_KEY, JSON.stringify(localProducts));
 }
 
 // 제안서 파일 삭제 여부 플래그
@@ -397,10 +410,19 @@ function editProduct(id) {
 
 // 상품 삭제
 function deleteProduct(id) {
+    // 고정 상품은 삭제 불가
+    const fixedProductIds = FIXED_PRODUCTS.map(p => p.id);
+    if (fixedProductIds.includes(id) || (typeof id === 'string' && id.startsWith('fixed-'))) {
+        alert('고정 상품은 삭제할 수 없습니다.');
+        return;
+    }
+    
     if (!confirm('정말 삭제하시겠습니까?')) return;
     
-    const products = getProducts();
-    const filtered = products.filter(p => p.id !== id);
+    const allProducts = getProducts();
+    const fixedProductIdsSet = new Set(fixedProductIds);
+    const localProducts = allProducts.filter(p => !fixedProductIdsSet.has(p.id) && !p.isFixed);
+    const filtered = localProducts.filter(p => p.id !== id);
     saveProducts(filtered);
     renderProducts();
 }
@@ -550,17 +572,20 @@ document.addEventListener('DOMContentLoaded', function() {
             caseAreas: caseAreas
         };
         
-        // 저장
-        const products = getProducts();
-        const existingIndex = products.findIndex(p => p.id === product.id);
+        // 저장 (고정 상품 제외하고 로컬 상품만 저장)
+        const allProducts = getProducts();
+        const fixedProductIds = FIXED_PRODUCTS.map(p => p.id);
+        const localProducts = allProducts.filter(p => !fixedProductIds.includes(p.id) && !p.isFixed);
+        
+        const existingIndex = localProducts.findIndex(p => p.id === product.id);
         
         if (existingIndex >= 0) {
-            products[existingIndex] = product;
+            localProducts[existingIndex] = product;
         } else {
-            products.push(product);
+            localProducts.push(product);
         }
         
-        saveProducts(products);
+        saveProducts(localProducts);
         renderProducts();
         closeModal();
         });
