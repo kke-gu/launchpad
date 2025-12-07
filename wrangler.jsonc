@@ -2,15 +2,7 @@
   "name": "launchpad",
   "compatibility_date": "2025-12-06",
   "assets": {
-    "directory": ".",
-    "binding": "ASSETS",
-    "exclude": [
-      ".git/**",
-      ".gitignore",
-      "wrangler.jsonc",
-      "schema.sql",
-      "migrations/**"
-    ]
+    "directory": "."
   },
   "d1_databases": [
     {
