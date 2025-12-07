@@ -3,10 +3,96 @@
 // 상품 데이터 저장소 (로컬 스토리지 사용)
 const PRODUCTS_STORAGE_KEY = 'growth_launchpad_products';
 
-// 상품 데이터 가져오기
+// 고정 상품 데이터 (항상 상단에 표시됨)
+const FIXED_PRODUCTS = [
+    {
+        id: 'fixed-1',
+        name: '범용 LMS',
+        description: '저렴한 월정액 요금으로 초기구축 비용없이 운영할 수 있는 클라우드 임대형 솔루션',
+        proposalFile: '범용 클라우드 제안서.pdf',
+        basicAreas: [
+            { buttonName: '홈페이지', url: 'https://www.malgnsoft.com/cloud/cloud.jsp#stickyMenu' },
+            { buttonName: '서비스 요금', url: 'https://www.malgnsoft.com/cloud/price.jsp#stickyMenu' }
+        ],
+        demoAreas: [
+            { buttonName: '관리자', url: 'https://kjh.malgnlms.com/sysop/index.jsp', id: '', password: '' },
+            { buttonName: '학습자', url: 'https://stdemo.malgnlms.com/main/index.jsp', id: '', password: '' }
+        ],
+        caseAreas: [
+            { customerName: 'KOSSDA 교육', url: 'https://kossda.methods.snu.ac.kr/main/index.jsp' },
+            { customerName: '제주관광공사', url: 'https://jacademy.ijto.or.kr/main/index.jsp' },
+            { customerName: '코바코광고교육원', url: 'https://e-learning.kobaco.co.kr/main/index.jsp' }
+        ]
+    },
+    {
+        id: 'fixed-2',
+        name: '공공 LMS',
+        description: '국내 유일 CSAP 인증으로 안정성과 신뢰성을 보장하는 공공 클라우드 LMS',
+        proposalFile: '[맑은소프트]공공 클라우드제안서 배포용_v2.pdf',
+        basicAreas: [
+            { buttonName: '홈페이지', url: 'https://csap.malgnsoft.com/main/index.jsp' },
+            { buttonName: '서비스 요금', url: 'https://csap.malgnsoft.com/main/index.jsp#price' }
+        ],
+        demoAreas: [
+            { buttonName: '관리자', url: 'https://nlms.malgnsoft.com/sysop/main/login.jsp', id: '', password: '' },
+            { buttonName: '학습자', url: 'https://nlms.malgnsoft.com/main/index.jsp', id: '', password: '' }
+        ],
+        caseAreas: [
+            { customerName: '국가건강정보포털', url: 'https://www.eduhealthinfo.com/main/index.jsp' },
+            { customerName: '종로구청', url: 'https://mtr.jongno.go.kr/main/index.jsp' }
+        ]
+    },
+    {
+        id: 'fixed-3',
+        name: '환급 LMS',
+        description: '모니터링, 부정훈련방지 등 고용노동부, 산업인력공단의 기준에 적합한 LMS',
+        proposalFile: '',
+        basicAreas: [
+            { buttonName: '홈페이지', url: 'https://www.malgnsoft.com/cloud/process.jsp#stickyMenu' },
+            { buttonName: '서비스 요금', url: 'https://www.malgnsoft.com/cloud/price.jsp#stickyMenu' }
+        ],
+        demoAreas: [
+            { buttonName: '관리자', url: 'https://kjh.malgnlms.com/sysop/index.jsp', id: '', password: '' },
+            { buttonName: '학습자', url: 'https://stdemo.malgnlms.com/main/index.jsp', id: '', password: '' },
+            { buttonName: '강사', url: 'https://hdemo.malgn.co.kr/tutor/', id: '', password: '' }
+        ],
+        caseAreas: [
+            { customerName: '에듀야원격평생교육원', url: 'https://www.eduyaa.net/main/index.jsp' },
+            { customerName: '안전보건진흥원', url: 'https://www.shaiedu.or.kr/main/index.jsp' }
+        ]
+    },
+    {
+        id: 'fixed-4',
+        name: '위캔디오',
+        description: '비디오를 배포하고, 관리하며, 측정할 수 있는 ALL-IN-ONE 비디오 클라우드 플랫폼',
+        proposalFile: '',
+        basicAreas: [
+            { buttonName: '비디오', url: 'https://www.wecandeo.com/video/video.jsp' },
+            { buttonName: '라이브', url: 'https://www.wecandeo.com/live/live.jsp' },
+            { buttonName: '인코딩', url: 'https://www.wecandeo.com/service/encoding_service.jsp' },
+            { buttonName: '서비스 요금', url: 'https://www.wecandeo.com/plan/plan.jsp' }
+        ],
+        demoAreas: [],
+        caseAreas: [
+            { customerName: '바로가기', url: 'https://story.wecandeo.com/' }
+        ]
+    }
+];
+
+// 상품 데이터 가져오기 (고정 상품 + 로컬 스토리지 상품)
 function getProducts() {
+    // 고정 상품 먼저 가져오기
+    const fixedProducts = FIXED_PRODUCTS.map(product => ({
+        ...product,
+        isFixed: true // 고정 상품 표시용 플래그
+    }));
+    
+    // 로컬 스토리지에서 상품 가져오기
     const stored = localStorage.getItem(PRODUCTS_STORAGE_KEY);
-    return stored ? JSON.parse(stored) : [];
+    const localProducts = stored ? JSON.parse(stored) : [];
+    
+    // 고정 상품과 로컬 상품 합치기 (고정 상품이 먼저)
+    return [...fixedProducts, ...localProducts];
 }
 
 // 상품 데이터 저장하기
@@ -32,7 +118,11 @@ function renderProducts() {
         return;
     }
     
-    container.innerHTML = products.map(product => `
+    container.innerHTML = products.map(product => {
+        // 고정 상품인지 확인
+        const isFixed = product.isFixed || (typeof product.id === 'string' && product.id.startsWith('fixed-'));
+        
+        return `
         <article class="product-card">
             <div class="product-card-header">
                 <h2>${escapeHtml(product.name)}</h2>
@@ -46,6 +136,7 @@ function renderProducts() {
                             </svg>
                             <span class="btn-icon-label">제안서</span>
                         </a>` : ''}
+                    ${!isFixed ? `
                     <div class="dropdown-menu-container">
                         <button type="button" class="btn-icon-only" onclick="toggleDropdown(${product.id})" title="메뉴">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,6 +150,7 @@ function renderProducts() {
                             <button type="button" onclick="deleteProduct(${product.id}); closeDropdown(${product.id});">삭제</button>
                         </div>
                     </div>
+                    ` : ''}
                 </div>
             </div>
             <p class="product-card-desc">${escapeHtml(product.description || '')}</p>
@@ -100,7 +192,8 @@ function renderProducts() {
                 </div>
             ` : ''}
         </article>
-    `).join('');
+    `;
+    }).join('');
 }
 
 // HTML 이스케이프
